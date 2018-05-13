@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+    // 我们希望组件能有自己的state值，而不是全部通过props传入，并且能够完成自更新，所以使用class创建组件会更方便
+    class Clock extends React.Component {
+        constructor(props) {
+            super(props)
+            this.state = {date: new Date()};
+        }
+        // componentDidMount 和 componentWillUnmount为生命周期函数
+        componentDidMount() {
+            // render 完成之后触发
+            this.timerID = setInterval(
+                    () => this.tick(),
+                    1000
+            );
+        }
+        componentWillUnmount() {
+            clearInterval(this.timerID)
+        }
+        tick() {
+            // 修改state时必须使用setState, 只有在constructor中可以直接用字面量给state赋值
+            this.setState({
+                date: new Date()
+            });
+        }
+        render() {
+            return (
+                <div>
+                    <h1>hi</h1>
+                    <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+                </div>
+            );
+        }
+    }
+
+    ReactDOM.render(
+            <Clock />,
+            document.getElementById('root')
+    )
+</script>
+</body>
+</html>

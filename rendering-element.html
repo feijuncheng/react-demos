@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+    const people = [
+        {
+            name: '张三',
+            age: 18
+        },
+        {
+            name: '李四',
+            age: 22
+        }
+    ]
+
+    function formatPeople(index) {
+        return `${people[index].name} is ${people[index].age} years old`
+    }
+
+    const element = <h1>{formatPeople(0)}!</h1> // jsx中可以直接写html， {} 中可以写变量、函数、计算、表达式等
+
+    ReactDOM.render(
+            element,
+            document.getElementById('root')
+    );
+
+</script>
+</body>
+</html>
